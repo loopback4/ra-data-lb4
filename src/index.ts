@@ -57,7 +57,7 @@ export default (
     httpClient = fetchUtils.fetchJson
 ): DataProvider => ({
     getList: async (resource, params) => {
-        const filter = stringify({
+        const query = stringify({
             filter: JSON.stringify({
                 where: params.filter,
                 offset:
@@ -68,7 +68,7 @@ export default (
             }),
         });
 
-        const result = await httpClient(`${apiUrl}/${resource}?${filter}`, {
+        const result = await httpClient(`${apiUrl}/${resource}?${query}`, {
             method: "GET",
             headers: new Headers({
                 "X-Total": "true",
@@ -81,14 +81,14 @@ export default (
         };
     },
     getOne: async (resource, params) => {
-        const filter = stringify({
+        const query = stringify({
             filter: JSON.stringify({
                 include: aggregate(resource),
             }),
         });
 
         const result = await httpClient(
-            `${apiUrl}/${resource}/${params.id}?${filter}`,
+            `${apiUrl}/${resource}/${params.id}?${query}`,
             {
                 method: "GET",
                 headers: new Headers({}),
@@ -100,7 +100,7 @@ export default (
         };
     },
     getMany: async (resource, params) => {
-        const filter = stringify({
+        const query = stringify({
             filter: JSON.stringify({
                 where: {
                     id: { inq: params.ids },
@@ -109,7 +109,7 @@ export default (
             }),
         });
 
-        const result = await httpClient(`${apiUrl}/${resource}?${filter}`, {
+        const result = await httpClient(`${apiUrl}/${resource}?${query}`, {
             method: "GET",
             headers: new Headers({}),
         });
@@ -119,7 +119,7 @@ export default (
         };
     },
     getManyReference: async (resource, params) => {
-        const filter = stringify({
+        const query = stringify({
             filter: JSON.stringify({
                 where: { ...params.filter, [params.target]: params.id },
                 offset:
@@ -130,7 +130,7 @@ export default (
             }),
         });
 
-        const result = await httpClient(`${apiUrl}/${resource}?${filter}`, {
+        const result = await httpClient(`${apiUrl}/${resource}?${query}`, {
             method: "GET",
             headers: new Headers({
                 "X-Total": "true",
@@ -165,7 +165,7 @@ export default (
         };
     },
     updateMany: async (resource, params) => {
-        const filter = stringify({
+        const query = stringify({
             filter: JSON.stringify({
                 where: {
                     id: { inq: params.ids },
@@ -173,7 +173,7 @@ export default (
             }),
         });
 
-        await httpClient(`${apiUrl}/${resource}?${filter}`, {
+        await httpClient(`${apiUrl}/${resource}?${query}`, {
             method: "PUT",
             body: JSON.stringify(clear(params.data)),
             headers: new Headers({}),
@@ -194,7 +194,7 @@ export default (
         };
     },
     deleteMany: async (resource, params) => {
-        const filter = stringify({
+        const query = stringify({
             filter: JSON.stringify({
                 where: {
                     id: { inq: params.ids },
@@ -202,7 +202,7 @@ export default (
             }),
         });
 
-        await httpClient(`${apiUrl}/${resource}?${filter}`, {
+        await httpClient(`${apiUrl}/${resource}?${query}`, {
             method: "DELETE",
             headers: new Headers({}),
         });

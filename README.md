@@ -15,6 +15,70 @@ npm i --save ra-data-lb4
 
 ## Usage
 
+```tsx
+// in src/App.tsx
+import React from "react";
+import { Admin, Resource } from "react-admin";
+import lb4Provider from "ra-data-lb4";
+
+import { PostList } from "./posts";
+
+const App = () => (
+    <Admin dataProvider={lb4Provider("http://path.to.my.api/")}>
+        <Resource name="posts" list={PostList} />
+    </Admin>
+);
+
+export default App;
+```
+
+---
+
+## Model Aggregation
+
+**Loopback4** supports model aggregations, using inclusion resolvers, you can pass your `include` params per model:
+
+```tsx
+// in src/App.tsx
+import { Admin, Resource } from "react-admin";
+import lb4Provider from "ra-data-lb4";
+
+const aggregate = (resource: string) => {
+    if (resource === "posts") {
+        return [
+            {
+                relation: "author",
+            },
+        ];
+    }
+
+    return [];
+};
+
+const provider = lb4Provider("http://path.to.my.api/", aggregate);
+```
+
+---
+
+## Customizing Http Client
+
+```tsx
+// in src/App.tsx
+import { fetchUtils, Admin, Resource } from "react-admin";
+import lb4Provider from "ra-data-lb4";
+
+const httpClient = (url, options = {}) => {
+    if (!options.headers) {
+        options.headers = new Headers({ Accept: "application/json" });
+    }
+    // add your own headers here
+    options.headers.set("X-Custom-Header", "foobar");
+    return fetchUtils.fetchJson(url, options);
+};
+
+const provider = lb4Provider("http://path.to.my.api/", undefined, httpClient);
+```
+
 ---
 
 ## Contributors

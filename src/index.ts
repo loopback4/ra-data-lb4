@@ -57,6 +57,8 @@ export default (
     httpClient = fetchUtils.fetchJson
 ): DataProvider => ({
     getList: async (resource, params) => {
+        const aggregator = aggregate(resource);
+
         const query = stringify({
             filter: JSON.stringify({
                 where: params.filter,
@@ -64,7 +66,7 @@ export default (
                     (params.pagination.page - 1) * params.pagination.perPage,
                 limit: params.pagination.perPage,
                 order: [`${params.sort.field} ${params.sort.order}`],
-                include: aggregate(resource),
+                include: aggregator.length > 0 ? aggregator : undefined,
             }),
         });
 
@@ -81,9 +83,11 @@ export default (
         };
     },
     getOne: async (resource, params) => {
+        const aggregator = aggregate(resource);
+
         const query = stringify({
             filter: JSON.stringify({
-                include: aggregate(resource),
+                include: aggregator.length > 0 ? aggregator : undefined,
             }),
         });
 
@@ -100,12 +104,14 @@ export default (
         };
     },
     getMany: async (resource, params) => {
+        const aggregator = aggregate(resource);
+
         const query = stringify({
             filter: JSON.stringify({
                 where: {
                     id: { inq: params.ids },
                 },
-                include: aggregate(resource),
+                include: aggregator.length > 0 ? aggregator : undefined,
             }),
         });
 
@@ -119,6 +125,8 @@ export default (
         };
     },
     getManyReference: async (resource, params) => {
+        const aggregator = aggregate(resource);
+
         const query = stringify({
             filter: JSON.stringify({
                 where: { ...params.filter, [params.target]: params.id },
@@ -126,7 +134,7 @@ export default (
                     (params.pagination.page - 1) * params.pagination.perPage,
                 limit: params.pagination.perPage,
                 order: [`${params.sort.field} ${params.sort.order}`],
-                include: aggregate(resource),
+                include: aggregator.length > 0 ? aggregator : undefined,
             }),
         });
 
@@ -161,7 +169,10 @@ export default (
         });
 
         return {
-            data: params.previousData as any,
+            data: {
+                ...params.previousData,
+                ...params.data,
+            },
         };
     },
     updateMany: async (resource, params) => {

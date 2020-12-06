@@ -36,7 +36,7 @@ export default App;
 
 ## Model Aggregation
 
-**Loopback4** supports model aggregations, using inclusion resolvers, you can pass your `include` params per model:
+**Loopback4** supports model aggregations using **inclusion resolvers**, you can pass your `include` params per model:
 
 ```tsx
 // in src/App.tsx

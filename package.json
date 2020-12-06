@@ -1,0 +1,45 @@
+{
+    "name": "ra-data-lb4",
+    "version": "0.1.0",
+    "description": "React Admin Loopback4 CRUD DataProvider",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "clean": "rm -Rf build",
+        "prebuild": "npm run clean",
+        "build": "tsc",
+        "build:watch": "tsc --watch",
+        "test": "mocha test/**/*.test.ts",
+        "prepublishOnly": "npm run build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ckoliber/ra-data-lb4.git"
+    },
+    "keywords": [
+        "ra",
+        "react",
+        "admin",
+        "react-admin",
+        "dataprovider",
+        "loopback4",
+        "loopback",
+        "lb4"
+    ],
+    "author": "KoLiBer",
+    "license": "MIT",
+    "files": [
+        "README.md",
+        "dist"
+    ],
+    "bugs": {
+        "url": "https://github.com/ckoliber/ra-data-lb4/issues"
+    },
+    "homepage": "https://github.com/ckoliber/ra-data-lb4#readme",
+    "devDependencies": {
+        "@types/mocha": "^8.0.4",
+        "mocha": "^8.2.1",
+        "ts-node": "^9.1.0",
+        "typescript": "^4.1.2"
+    }
+}

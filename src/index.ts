@@ -2,6 +2,10 @@ import { DataProvider, fetchUtils } from "ra-core";
 import { stringify } from "query-string";
 
 /**
+ * 1. Remove null values
+ * 2. Convert Date toISOString
+ * 3. Remove same with previous values
+ *
  * {
  *  a:1,
  *  b:2,
@@ -16,7 +20,7 @@ import { stringify } from "query-string";
 const clear = (data: object, previous?: any): any => {
     return Object.fromEntries(
         Object.entries(data)
-            .filter(([key, value]) => value !== null && value !== undefined)
+            .filter(([_, value]) => value !== null && value !== undefined)
             .map(([key, value]) => {
                 if (typeof value !== "object") {
                     return [key, value];
@@ -49,6 +53,7 @@ const clear = (data: object, previous?: any): any => {
 
 export default (
     apiUrl: string,
+    inclusion = (resource: string) => [] as object[],
     httpClient = fetchUtils.fetchJson
 ): DataProvider => ({
     getList: async (resource, params) => {
@@ -59,7 +64,7 @@ export default (
                     (params.pagination.page - 1) * params.pagination.perPage,
                 limit: params.pagination.perPage,
                 order: [`${params.sort.field} ${params.sort.order}`],
-                include: [],
+                include: inclusion(resource),
             }),
         });
 
@@ -78,7 +83,7 @@ export default (
     getOne: async (resource, params) => {
         const filter = stringify({
             filter: JSON.stringify({
-                include: [],
+                include: inclusion(resource),
             }),
         });
 
@@ -100,7 +105,7 @@ export default (
                 where: {
                     id: { inq: params.ids },
                 },
-                include: [],
+                include: inclusion(resource),
             }),
         });
 
@@ -116,12 +121,12 @@ export default (
     getManyReference: async (resource, params) => {
         const filter = stringify({
             filter: JSON.stringify({
-                where: params.filter,
+                where: { ...params.filter, [params.target]: params.id },
                 offset:
                     (params.pagination.page - 1) * params.pagination.perPage,
                 limit: params.pagination.perPage,
                 order: [`${params.sort.field} ${params.sort.order}`],
-                include: [],
+                include: inclusion(resource),
             }),
         });
 

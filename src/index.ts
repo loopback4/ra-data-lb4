@@ -53,7 +53,7 @@ const clear = (data: object, previous?: any): any => {
 
 export default (
     apiUrl: string,
-    inclusion = (resource: string) => [] as object[],
+    aggregate = (resource: string) => [] as object[],
     httpClient = fetchUtils.fetchJson
 ): DataProvider => ({
     getList: async (resource, params) => {
@@ -64,7 +64,7 @@ export default (
                     (params.pagination.page - 1) * params.pagination.perPage,
                 limit: params.pagination.perPage,
                 order: [`${params.sort.field} ${params.sort.order}`],
-                include: inclusion(resource),
+                include: aggregate(resource),
             }),
         });
 
@@ -83,7 +83,7 @@ export default (
     getOne: async (resource, params) => {
         const filter = stringify({
             filter: JSON.stringify({
-                include: inclusion(resource),
+                include: aggregate(resource),
             }),
         });
 
@@ -105,7 +105,7 @@ export default (
                 where: {
                     id: { inq: params.ids },
                 },
-                include: inclusion(resource),
+                include: aggregate(resource),
             }),
         });
 
@@ -126,7 +126,7 @@ export default (
                     (params.pagination.page - 1) * params.pagination.perPage,
                 limit: params.pagination.perPage,
                 order: [`${params.sort.field} ${params.sort.order}`],
-                include: inclusion(resource),
+                include: aggregate(resource),
             }),
         });
 

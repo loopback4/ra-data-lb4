@@ -1,11 +1,11 @@
 {
     "name": "ra-data-lb4",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "React Admin Loopback4 CRUD DataProvider",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "clean": "rm -Rf build",
+        "clean": "rm -Rf dist",
         "prebuild": "npm run clean",
         "build": "tsc",
         "build:watch": "tsc --watch",
@@ -36,14 +36,16 @@
         "url": "https://github.com/ckoliber/ra-data-lb4/issues"
     },
     "homepage": "https://github.com/ckoliber/ra-data-lb4#readme",
-    "dependencies": {
+    "peerDependencies": {
         "query-string": "^6.13.7",
-        "ra-core": "^3.10.3"
+        "ra-core": "^3.10.4"
     },
     "devDependencies": {
-        "@types/mocha": "^8.0.4",
+        "@types/mocha": "^8.2.0",
         "mocha": "^8.2.1",
-        "ts-node": "^9.1.0",
+        "query-string": "^6.13.7",
+        "ra-core": "^3.10.4",
+        "ts-node": "^9.1.1",
         "typescript": "^4.1.2"
     }
 }

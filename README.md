@@ -1,13 +1,15 @@
 # ra-data-lb4
 
-![Travis (.org) branch](https://img.shields.io/travis/ckoliber/ra-data-lb4/master)
-![npm](https://img.shields.io/npm/v/ra-data-lb4)
-![npm bundle size](https://img.shields.io/bundlephobia/min/ra-data-lb4)
-![GitHub](https://img.shields.io/github/license/ckoliber/ra-data-lb4)
+![checks](https://img.shields.io/github/checks-status/loopback4/ra-data-lb4/next)
+![npm latest](https://img.shields.io/npm/v/ra-data-lb4/latest)
+![npm next](https://img.shields.io/npm/v/ra-data-lb4/next)
+![license](https://img.shields.io/github/license/loopback4/ra-data-lb4)
 
 React Admin Loopback4 CRUD DataProvider
 
 ## Installation
+
+Use the package manager [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install `ra-data-lb4`.
 
 ```bash
 npm i --save ra-data-lb4
@@ -34,7 +36,7 @@ export default App;
 
 ---
 
-## Model Aggregation
+### Model Aggregation
 
 **Loopback4** supports model aggregations using **inclusion resolvers**, you can pass your `include` params per model:
 
@@ -60,7 +62,7 @@ const provider = lb4Provider("http://path.to.my.api/", aggregate);
 
 ---
 
-## Customizing Http Client
+### Customizing Http Client
 
 ```tsx
 // in src/App.tsx
@@ -81,11 +83,13 @@ const provider = lb4Provider("http://path.to.my.api/", undefined, httpClient);
 
 ---
 
-## Contributors
+## Contributing
 
--   [KoLiBer](https://www.linkedin.com/in/mohammad-hosein-nemati-665b1813b/)
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
 
 ## License
 
-This project is licensed under the [MIT license](LICENSE.md).  
+This project is licensed under the [MIT](LICENSE.md).  
 Copyright (c) KoLiBer (koliberr136a1@gmail.com)

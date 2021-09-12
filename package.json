@@ -7,7 +7,7 @@
     "scripts": {
         "start": "nodemon --exec \"node -r ts-node/register --inspect=0.0.0.0\" src/index.ts",
         "build": "tsc",
-        "test": "mocha --allow-console-logs \"test/**/*.test.ts\""
+        "test": "mocha \"test/**/*.test.ts\""
     },
     "repository": {
         "type": "git",

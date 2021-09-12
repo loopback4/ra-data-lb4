@@ -1,3 +1,10 @@
+## [0.4.1-next.1](https://github.com/ckoliber/ra-data-lb4/compare/0.4.0...0.4.1-next.1) (2021-09-12)
+
+
+### Bug Fixes
+
+* change README ([46a6e26](https://github.com/ckoliber/ra-data-lb4/commit/46a6e26767efb3fd58fe5c984d41c0396c05bab6))
+
 # [0.4.0](https://github.com/ckoliber/ra-data-lb4/compare/0.3.0...0.4.0) (2021-09-12)
 
 

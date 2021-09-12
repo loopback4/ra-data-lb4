@@ -1,5 +1,3 @@
-# Changelog
-
 ## v0.3.0
 
 -   **Fix**: add `ra-core` to peerDependencies and devDependencies

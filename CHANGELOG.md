@@ -1,3 +1,10 @@
+## [0.4.1-next.2](https://github.com/ckoliber/ra-data-lb4/compare/0.4.1-next.1...0.4.1-next.2) (2021-11-15)
+
+
+### Bug Fixes
+
+* **CI:** merge request, release workflows into one CI/CD workflow ([3306a42](https://github.com/ckoliber/ra-data-lb4/commit/3306a424c37a27a9ed1c77c664c9479a909d9cbc))
+
 ## [0.4.1-next.1](https://github.com/ckoliber/ra-data-lb4/compare/0.4.0...0.4.1-next.1) (2021-09-12)
 
 

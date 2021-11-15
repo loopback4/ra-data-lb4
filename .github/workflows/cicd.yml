@@ -1,6 +1,11 @@
-name: Request
+name: CI/CD
 
 on:
+    push:
+        branches:
+            - "+([0-9])?(.{+([0-9]),x}).x"
+            - master
+            - next
     pull_request:
         branches:
             - "+([0-9])?(.{+([0-9]),x}).x"
@@ -40,3 +45,29 @@ jobs:
                   node-version: "14"
 
             - run: npm run test
+
+    release:
+        needs: test
+        runs-on: ubuntu-latest
+        if: github.event_name == 'push'
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/cache@v2
+              with:
+                  path: dist/
+                  key: ${{ github.sha }}
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: "14"
+
+            - run: cp .github/.releaserc.yml .
+            - run: |
+                  npm i -g semantic-release \
+                      @semantic-release/git \
+                      @semantic-release/npm \
+                      @semantic-release/changelog \
+                      @saithodev/semantic-release-backmerge
+            - run: npx semantic-release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

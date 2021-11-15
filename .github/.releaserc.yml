@@ -9,10 +9,10 @@ plugins:
     - "@semantic-release/changelog"
     - "@semantic-release/npm"
     - - "@semantic-release/git"
-      - message: "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
-        assets:
+      - assets:
             - CHANGELOG.md
             - package.json
             - package-lock.json
     - - "@saithodev/semantic-release-backmerge"
-      - branchName: next
+      - branches:
+            - { from: "master", to: "next" }

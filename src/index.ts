@@ -151,7 +151,7 @@ export default (
         };
     },
     create: async (resource, params) => {
-        const result = await httpClient(`${apiUrl}/${resource}/one`, {
+        const result = await httpClient(`${apiUrl}/${resource}`, {
             method: "POST",
             body: JSON.stringify(clear(params.data)),
             headers: new Headers({}),
